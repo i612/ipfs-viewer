@@ -19,13 +19,16 @@
             type="error"
           >{{ genericError }}</v-alert>
         </v-flex>
-        <v-flex xs12>
+        <v-flex class="d-flex" xs12>
+          <v-card v-if="preview" class="mr-4" width="56" height="56" flat>
+            <v-img :src="preview" width="100%" height="100%" />
+          </v-card>
           <v-file-input
             v-model="file"
             label="Image Upload"
             accept="image/*"
             outlined
-            @change="processEXIF"
+            @change="onChangeFile"
           ></v-file-input>
         </v-flex>
         <v-flex
@@ -205,6 +208,7 @@ export default {
     txHash: '',
 
     file: null,
+    preview: null,
     dateTime: processDateTime(new Date()),
     latitude: 0,
     longitude: 0,
@@ -248,6 +252,17 @@ export default {
     this.setUpEth();
   },
   methods: {
+    loadPreview(file) {
+      if (file) {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          this.preview = reader.result;
+        }, false);
+        reader.readAsDataURL(file);
+      } else {
+        this.preview = null;
+      }
+    },
     async processEXIF(file) {
       this.hasExif = false;
       this.isProcessingEXIF = true;
@@ -267,6 +282,10 @@ export default {
       } finally {
         this.isProcessingEXIF = false;
       }
+    },
+    onChangeFile(file) {
+      this.processEXIF(file);
+      this.loadPreview(file);
     },
     async onSubmit() {
       try {
