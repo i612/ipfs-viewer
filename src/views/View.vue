@@ -194,10 +194,11 @@
 <script>
 import axios from 'axios';
 import Web3 from 'web3';
-import { abi, address } from '../constant/contract';
+import { storageAbi } from '../constant/contract';
+import { ethEndpoint, ethStorageContractAddr } from '../../config';
 
-const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/66d5ee46e5a14aa387c9e4fbc662727f'));
-const Storage = new web3.eth.Contract(abi, address);
+const web3 = new Web3(new Web3.providers.HttpProvider(ethEndpoint));
+const Storage = new web3.eth.Contract(storageAbi, ethStorageContractAddr);
 
 export default {
   name: 'ContentView',
@@ -233,7 +234,7 @@ export default {
     },
     txHashUrl() {
       if (this.txHash) return `https://etherscan.io/tx/${this.txHash}`;
-      return `https://etherscan.io/address/${address}`;
+      return `https://etherscan.io/address/${ethStorageContractAddr}`;
     },
     imageSource() {
       if (!this.ipfsHash) return '';

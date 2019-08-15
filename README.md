@@ -22,3 +22,10 @@ npm run serve
 ```
 npm run build
 ```
+
+## Development on testnet
+
+If you wants to test the frontend code on the Rinkeby testnet:
+
+1. Replace `config.js` with `config.rinkeby.js`
+2. Select the Rinkeby network in your Metamask

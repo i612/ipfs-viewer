@@ -167,16 +167,17 @@
 
 <script>
 import Web3 from 'web3';
-import { abi, address } from '../constant/contract';
+import { storageAbi } from '../constant/contract';
 import {
   removeExif,
   processEXIF,
 } from '../util/exif';
 import { processDateTime } from '../util/misc';
+import { ipfsEndpoint, ethStorageContractAddr } from '../../config';
 
 const ipfsClient = require('ipfs-http-client');
 
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' });
+const ipfs = ipfsClient(ipfsEndpoint);
 
 const LICENSE_OPTIONS = [
   { text: 'CC0', value: 'https://creativecommons.org/publicdomain/zero/1.0' },
@@ -337,7 +338,7 @@ export default {
             return;
           }
           this.hasWeb3Inited = true;
-          this.Storage = new this.web3.eth.Contract(abi, address);
+          this.Storage = new this.web3.eth.Contract(storageAbi, ethStorageContractAddr);
         } catch (err) {
           this.web3Error = 'Please accept the connect request in Metamask';
           console.error(err);
