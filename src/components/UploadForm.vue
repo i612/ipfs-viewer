@@ -332,10 +332,12 @@ export default {
         this.web3 = new Web3(ethereum);
         try {
           await ethereum.enable();
-          const network = await this.web3.eth.net.getNetworkType();
-          if (network !== 'main') {
-            this.web3Error = 'Please switch to Main Network';
-            return;
+          if (process.env.VUE_APP_PRODUCTION) {
+            const network = await this.web3.eth.net.getNetworkType();
+            if (network !== 'main') {
+              this.web3Error = 'Please switch to Main Network';
+              return;
+            }
           }
           this.hasWeb3Inited = true;
           this.Storage = new this.web3.eth.Contract(storageAbi, ethStorageContractAddr);
