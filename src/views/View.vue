@@ -193,7 +193,7 @@
 import axios from 'axios';
 import Web3 from 'web3';
 import { storageAbi } from '../constant/contract';
-import { ethEndpoint, ethStorageContractAddr } from '../../config';
+import { ethEndpoint, ethStorageContractAddr, ethEventFromBlock } from '../../config';
 
 const web3 = new Web3(new Web3.providers.HttpProvider(ethEndpoint));
 const Storage = new web3.eth.Contract(storageAbi, ethStorageContractAddr);
@@ -282,7 +282,7 @@ export default {
       this.pingForIPFSHost();
       const id = web3.utils.sha3(this.hash);
       const events = await Storage.getPastEvents('Data', {
-        fromBlock: 8340000,
+        fromBlock: ethEventFromBlock,
         filter: { id },
       });
       const event = events.find(e => e.returnValues.data === this.hash);
