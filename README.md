@@ -1,6 +1,14 @@
 # i612
 
-## Project setup
+Lennon Wall on blockchain and IPFS.
+
+Image will be first put onto IPFS.
+
+Then metadata with image IPFS address will be put into IPLD.
+
+Lastly the IPLD hash will be put onto Ethereum blockchain.
+
+## Setup
 ```
 npm install
 ```
@@ -14,16 +22,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
