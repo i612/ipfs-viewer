@@ -158,7 +158,7 @@
             <v-list-item-subtitle>
               <v-responsive class="mt-2" :aspect-ratio="16/9">
                 <iframe
-                  :src="`https://www.google.com/maps/embed/v1/view?key=${GOOGLE_MAP_KEY}&center=${latitude},${longitude}&zoom=18&maptype=satellite`"
+                  :src="`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAP_KEY}&center=${latitude},${longitude}&q=${latitude},${longitude}&zoom=18&maptype=roadmap`"
                   width="100%"
                   height="100%"
                   frameborder="0"
