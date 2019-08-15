@@ -161,8 +161,8 @@
       <v-flex class="text-center">
         <span v-if="submitState === 0">Uploading file to IPFS...</span>
         <span v-else-if="submitState === 1">Uploading metadata to IPLD</span>
-        <span v-else-if="submitState === 2">Signing to Ethereum...</span>
-        <span v-else-if="submitState === 3">Pinning...</span>
+        <span v-else-if="submitState === 2">Pinning data to IPFS...</span>
+        <span v-else-if="submitState === 3">Signing to Ethereum...</span>
       </v-flex>
     </v-snackbar>
   </v-form>
@@ -323,15 +323,16 @@ export default {
         }
         const ipldHash = this.ipld.toBaseEncodedString();
         if (this.submitState < 3) {
-          this.txHash = await this.ethUpload(ipldHash);
-          this.submitState = 3;
-        }
-        if (this.submitState < 4) {
           const promises = [
             ipfs.pin.add(ipfsHash, { recursive: false }),
             ipfs.pin.add(ipldHash, { recursive: false }),
           ];
           await Promise.all(promises);
+          this.submitState = 3;
+        }
+
+        if (this.submitState < 4) {
+          this.txHash = await this.ethUpload(ipldHash);
           this.submitState = 4;
         }
         this.submitState = 0;
