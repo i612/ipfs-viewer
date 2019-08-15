@@ -146,9 +146,7 @@
         <v-list-item v-if="properties.description">
           <v-list-item-content>
             <v-list-item-title class="font-weight-bold">Description</v-list-item-title>
-            <v-list-item-subtitle>
-              {{ properties.description }}
-            </v-list-item-subtitle>
+            <div class="v-list-item__action-text body-2">{{ properties.description }}</div>
           </v-list-item-content>
         </v-list-item>
 
