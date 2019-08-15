@@ -1,6 +1,14 @@
 # i612
 
-## Project setup
+Lennon Wall on blockchain and IPFS.
+
+Image will be first put onto IPFS.
+
+Then metadata with image IPFS address will be put into IPLD.
+
+Lastly the IPLD hash will be put onto Ethereum blockchain.
+
+## Setup
 ```
 npm install
 ```
@@ -15,15 +23,9 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
+## Development on testnet
 
-### Lints and fixes files
-```
-npm run lint
-```
+If you wants to test the frontend code on the Rinkeby testnet:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. Replace `config.js` with `config.rinkeby.js`
+2. Select the Rinkeby network in your Metamask
